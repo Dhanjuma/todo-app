@@ -32,7 +32,7 @@ function App() {
   const [isToClearAll, setIsToClearAll] = React.useState(false);
   const [clearButton, setClearButton] = React.useState("");
   const [alert, setAlert] = React.useState({ show: false, msg: "", type: "" });
-  const [buttonValue, setButtonValue] = React.useState(["all", "some"]);
+  const [buttonValue] = React.useState(["all", "some"]);
 
   // ?? checks if any todo is completed/done
   const anyDone = allTodos.some((todos) => todos.done);
