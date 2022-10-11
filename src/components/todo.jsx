@@ -8,6 +8,8 @@ import {
   MdWork,
   MdQuickreply,
   MdPerson,
+  MdCancel,
+  MdCheckCircle,
 } from "react-icons/md";
 
 const Todo = ({
@@ -22,6 +24,14 @@ const Todo = ({
   filterItems,
   display,
   specific,
+  revealDelete,
+  isShowDelete,
+  hideDelete,
+  hideDeleteAll,
+  showDeleteAll,
+  clearAll,
+  clearButton,
+  buttonValue,
 }) => {
   return (
     <>
@@ -49,18 +59,44 @@ const Todo = ({
             </section>
           )}
           {todos.length > 0 && (
-            <button onClick={clear} className="btn clr-btn">
+            <button
+              onClick={(event) => showDeleteAll(event)}
+              value={buttonValue[0]}
+              className={`btn clr-btn ${
+                buttonValue[0] === clearButton ? "clicked" : ""
+              }`}
+            >
               Clear {specific === "all" ? "all" : "category"}
             </button>
           )}
-          {done && (
-            <button onClick={clearCompleted} className="btn clr-btn">
+          {done && specific !== "done" && (
+            <button
+              onClick={(event) => showDeleteAll(event)}
+              value={buttonValue[1]}
+              className={`btn clr-btn ${
+                buttonValue[1] === clearButton ? "clicked" : ""
+              }`}
+            >
               Clear completed
             </button>
           )}
+          {isShowDelete && (
+            <div className="confirm-delete">
+              <p>are you sure?</p>
+              <button
+                onClick={clearAll ? clear : clearCompleted}
+                className="yes"
+              >
+                <MdCheckCircle />
+              </button>
+              <button onClick={hideDeleteAll} className="no">
+                <MdCancel />
+              </button>
+            </div>
+          )}
         </header>
         {display.map((todo) => {
-          const { work, category, id, done } = todo;
+          const { work, category, id, done, showDelete } = todo;
 
           let icon;
           if (category === "work") {
@@ -92,12 +128,23 @@ const Todo = ({
                     />
                   </button>
                   <button
-                    onClick={() => clearOne(id)}
+                    onClick={() => revealDelete(id)}
                     className={`delete ${finishedIcon}`}
                   >
                     <MdDeleteForever />
                   </button>
                 </article>
+                {showDelete && (
+                  <div className="confirm-delete">
+                    <p>are you sure?</p>
+                    <button onClick={() => clearOne(id)} className="yes">
+                      <MdCheckCircle />
+                    </button>
+                    <button onClick={() => hideDelete(id)} className="no">
+                      <MdCancel />
+                    </button>
+                  </div>
+                )}
               </section>
               <div className="separator"></div>
             </article>

@@ -51,9 +51,7 @@ const Form = ({
           <option value="urgent">Urgent</option>
         </select>
         <br />
-        {/* <br /> */}
-        {/* <br /> */}
-        {/* <br /> */}
+
         <button className="btn" type="submit">
           {isEditing ? "edit todo" : "add todo"}
         </button>

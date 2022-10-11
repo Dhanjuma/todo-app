@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap");
 
-* {
+*,
+::after,
+::before {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -14,7 +16,14 @@ body {
 
 button:hover {
   cursor: pointer;
+  filter: brightness(120%);
 }
+button:active {
+  cursor: pointer;
+  filter: brightness(80%);
+}
+
+/* !! todo app */
 
 .todo-app {
   display: flex;
@@ -25,10 +34,16 @@ button:hover {
   margin: 5rem 0;
 }
 
+/* !! form component */
+
+.form {
+  background-color: #f4f0bb;
+  padding: 1rem;
+  margin: 2rem;
+  border-radius: 0.5rem;
+}
+
 .header {
-  /* display: flex;
-  justify-content: flex-start;
-  align-items: center; */
   margin-bottom: 3rem;
 }
 .header > h2 {
@@ -45,15 +60,19 @@ button:hover {
 }
 
 .alert {
-  background: #ff9b71;
-  display: flex;
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  width: fit-content;
 }
-
-.form {
-  background-color: #f4f0bb;
-  padding: 1rem;
-  margin: 2rem;
-  border-radius: 0.5rem;
+.alert-success {
+  background: #02a01c;
+  color: #f4f0bb;
+}
+.alert-warn {
+  background: #a01a02;
+  color: #f4f0bb;
 }
 
 .input {
@@ -65,20 +84,13 @@ button:hover {
   border-radius: 0.5rem;
   border: 1px solid #42291f;
   box-sizing: border-box;
-  /* border: none; */
-}
-.input:focus {
-  /* outline: 2px solid #43291f; */
-  /* outline-offset: -5px; */
-  /* outline: none; */
-  /* border-bottom: 2px solid #43291f; */
 }
 .error {
   border: 3px solid #a01a02;
   outline: none;
 }
+
 .form > select {
-  /* border: 2px solid #42291f; */
   border-radius: 0.25rem;
   background-color: #f8c0a8;
   color: #42291f;
@@ -90,62 +102,13 @@ button:hover {
   color: #444644;
   font-family: "Josefin Sans", sans-serif;
   font-size: 1rem;
-  /* width: 10rem; */
   margin-top: 1rem;
   margin-left: 7rem;
   padding: 0.5rem;
   border-radius: 0.75rem;
 }
 
-.cats-container {
-  background: #42291f;
-  padding: 1rem;
-  /* color: #0f0f0f; */
-  border-radius: 0.75rem;
-}
-.cat {
-  background-color: #43291f;
-  color: #ff9b71;
-  border: 1px solid #ff9b71;
-  /* background-color: #ff9b71; */
-  /* border: none; */
-  text-transform: uppercase;
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 1rem;
-  /* width: 10rem; */
-  /* margin-top: 1rem; */
-  /* margin-left: 7rem; */
-  margin: 0.5rem 1rem;
-  padding: 0.5rem;
-  font-weight: 700;
-  border-radius: 0.25rem;
-}
-.cat-underline {
-  width: 5rem;
-  height: 0.25rem;
-  border: 1px solid #ff9b71;
-
-  /* margin-bottom: 1.25rem; */
-  /* background: #f7ede9; */
-  margin-left: 2rem;
-  margin-right: auto;
-}
-.active > .cat {
-  /* background-color: #43291f; */
-  background-color: #ff9b71;
-  color: #43291f;
-}
-.active > .cat-underline {
-  background-color: #ff9b71;
-}
-.btn:hover {
-  background-color: #f3a17e;
-  color: #555755;
-}
-.btn:active {
-  background-color: #f8c0a8;
-  color: #c6cac6;
-}
+/* !! todo component */
 
 .todos-container {
   background-color: #f4f0bb;
@@ -156,19 +119,100 @@ button:hover {
   border-radius: 0.5rem;
   font-size: 1.25rem;
 }
+
 .top {
   padding-bottom: 1rem;
   border-bottom: 2px solid #42291f;
 }
+
+.cats-container {
+  background: #42291f;
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+
+.cat {
+  background-color: #43291f;
+  color: #ff9b71;
+  border: 1px solid #ff9b71;
+  text-transform: uppercase;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1rem;
+  margin: 0.5rem 1rem;
+  padding: 0.5rem;
+  font-weight: 700;
+  border-radius: 0.25rem;
+}
+
+.cat-underline {
+  width: 5rem;
+  height: 0.25rem;
+  border: 1px solid #ff9b71;
+  margin-left: 2rem;
+  margin-right: auto;
+}
+
+.active > .cat {
+  background-color: #ff9b71;
+  color: #43291f;
+}
+.active > .cat-underline {
+  background-color: #ff9b71;
+}
+
 .clr-btn {
   margin-right: auto;
   margin-left: 1rem;
 }
-.task-container {
+.clicked {
+  background-color: #43291f;
+  color: #ff9b71;
+  border: 1px solid #ff9b71;
+}
+
+.confirm-delete {
+  justify-self: center;
+  align-self: center;
+  color: #43291f;
   background-color: #f4f0bb;
+  border-radius: 0.75rem;
+  padding: 0.5rem;
   display: flex;
-  /* margin: 0; */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  font-weight: 700;
+}
+
+.yes {
+  background: transparent;
+  border: none;
+  color: #02a01c;
+  font-size: 1.75rem;
+  width: fit-content;
+}
+
+.no {
+  background: transparent;
+  border: none;
+  color: #a01a02;
+  font-size: 1.75rem;
+}
+
+.task-container {
+  display: flex;
   flex-direction: column;
+}
+
+.tasks {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #ff9b71;
+  border-radius: 2rem;
+  word-wrap: break-word;
+  margin: 2rem 0.5rem;
 }
 
 .title {
@@ -178,47 +222,17 @@ button:hover {
   overflow-wrap: break-word;
   word-wrap: break-word;
   line-height: 1.5rem;
-  /* display: flex; */
-  /* gap: 5px; */
-}
-.work {
-  /* overflow-wrap: break-word;
-  word-wrap: break-word; */
-  /* word-break: break-all; */
-  /* hyphens: auto;
-  line-height: 1.5rem; */
-  /* margin-right: auto; */
-}
-
-.separator {
-  width: 45vw;
-  height: 0.25rem;
-  /* margin-top: 3rem; */
-  margin-bottom: 1.25rem;
-  background: #43291f;
-  /* margin-left: 6rem; */
-  /* margin-right: auto; */
-  align-self: flex-end;
-}
-
-.tasks {
-  padding: 1rem;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
-  background-color: #ff9b71;
-  border-radius: 2rem;
-  word-wrap: break-word;
-  /* gap: 0.5rem; */
-  /* width: 100%; */
-  /* justify-content: center; */
-  margin: 2rem 0.5rem;
 }
 
 .finished {
   background-color: #f8c0a8;
   color: hsl(120, 1%, 57%);
+}
+.finished > header {
   text-decoration: line-through;
+}
+.finished > .confirm-delete {
+  background-color: #f1eeb9;
 }
 
 .icons-container {
@@ -226,31 +240,34 @@ button:hover {
   flex-wrap: wrap;
   align-items: center;
   gap: 1.5rem;
-  /* margin: 2rem 1rem 0 2rem; */
   width: 100%;
-  /* justify-content: center; */
-  /* justify-self: flex-end; */
   margin-right: auto;
+}
+
+.icons-container > button {
+  background-color: inherit;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.finishedIcon {
+  color: #070600;
+}
+.hideIcon {
+  display: none;
 }
 .delete {
   margin-left: auto;
   margin-right: 5rem;
 }
-.icons-container > button {
-  background-color: inherit;
-  border: none;
-  font-size: 1.5rem;
-
-  /* font-size: 1.25rem; */
-  /* justify-self: flex-start; */
-  /* margin-right: auto; */
-}
-.hideIcon {
-  display: none;
-}
-.finishedIcon {
-  color: #070600;
-}
 .unfinishedIcon {
   color: hsl(120, 2%, 32%);
+}
+
+.separator {
+  width: 45vw;
+  height: 0.25rem;
+  margin-bottom: 1.25rem;
+  background: #43291f;
+  align-self: flex-end;
 }
